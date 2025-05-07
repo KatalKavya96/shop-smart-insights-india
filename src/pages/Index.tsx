@@ -287,7 +287,10 @@ const Index = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <ImagePlaceholder 
                   title="BOT Diagram" 
-                  description="Upload your Business Ownership Transfer diagram here" 
+                  description="Business Ownership Transfer loop dynamics affecting small sellers"
+                  imageSrc="https://media-hosting.imagekit.io/905645c47c8b4995/BOT.png?Expires=1841245659&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OK3pEkdaduIBUUmCrUxfS~ZHsRvNGiJk6NUJ1Ltl0RH1xsfPKBrmqdMG4nYYK6G6T1Y4WvNnta6snGTGZnwXPinOACjTZNcqSbQj7~zfv0GY-jwBR4ZPb-kDsFOzDaXTJX9RulsQyTnOqCWYWkr5daB2Tm18c3uyvLiCLyK1u-myZmLnmyHoYIu9y8w8N5CGlHg2BZ-YKyOW2rxJFLnQ70g4f5uVgOPUbnfm2G-WkbqJ1UahYMWcJvqghKDx8kakqQSn~UTK7UmnlYnT9PXSmIchQFiuH-V3D-d2iEZI6RIzk7ThvfSpk~pMJNSquzXEnBMy2JNCehBa6Rp7a1ohlA__"
+                  downloadable={true}
+                  downloadExtension="jpeg"
                 />
                <ImagePlaceholder 
                   title="CLD Diagram" 
@@ -298,8 +301,12 @@ const Index = () => {
                   downloadLink="https://drive.google.com/file/d/1dO4gc2G5ojC9m7QFPejIihKJ2kHwDVAl/view?usp=sharing"
                 />
                 <ImagePlaceholder 
+                
                   title="Stock Flow Diagram" 
-                  description="Upload your Stock and Flow diagram here" 
+                  description="Stock and Flow representation of dynamics in small seller ecosystems"
+                  imageSrc="https://media-hosting.imagekit.io/c0dfcb96870b43d0/WhatsApp%20Image%202025-05-07%20at%2010.37.57%20PM.jpeg?Expires=1841245691&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=G6O71JzpAj7Zltw1eF7TKpWz0QfB7mls3QPAUCWL6s249KLsvzDO48zvyKjNS1uXDEZQXHMynsNbudKmjlHc4ZkAovRxkA506i5IkkhQdgkbL9YAxPSMfq2lHjdBUVfItlsPcWK~JWZet-qrWaCCJgWcu5UUospSSl-W639lkhdjXEV8uPFEYLNKoflJmGGv4BaeCAu1Cr0t~eDioPCsJgAmDwD5wJXx5clepp43L8DVj7lqhSL1hZ8Ptm4EkdxIQM0dT3LdUlQSg2xmJbsMcz-ozCTrd8beS4~M1ggD6k76NKO2MhgONb9ACn6HHvLAkiHVkBuDCqY~YkW-p2q7wQ__"
+                  downloadable={true}
+                  downloadExtension="jpeg"
                 />
               </div>
             )}
