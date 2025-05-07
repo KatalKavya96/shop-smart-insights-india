@@ -56,6 +56,11 @@ const Index = () => {
               subtitle="Analyzing why small shops struggle on major e-commerce platforms in India's digital market" 
             />
             
+            {/* QA Section moved to top */}
+            <section id="qa" className="mb-12">
+              <QASection />
+            </section>
+            
             {loading ? (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[1, 2, 3].map((i) => (
@@ -63,70 +68,53 @@ const Index = () => {
                 ))}
               </div>
             ) : (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                  <ImagePlaceholder 
-                    title="BOT Diagram" 
-                    description="Upload your Business Ownership Transfer diagram here" 
-                  />
-                  <ImagePlaceholder 
-                    title="CLD Diagram" 
-                    description="Upload your Causal Loop Diagram here" 
-                  />
-                  <ImagePlaceholder 
-                    title="Stock Flow Diagram" 
-                    description="Upload your Stock and Flow diagram here" 
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                  <DataChart
-                    title="Market Share Evolution"
-                    description="Small shops vs large sellers on major platforms (2018-2024)"
-                    data={marketShareData}
-                    type="area"
-                    dataKeys={{
-                      xAxis: "year",
-                      bars: [
-                        { key: "smallShops", color: "#0ea5e9" },
-                        { key: "largeSellers", color: "#f59e0b" },
-                      ],
-                      areas: [
-                        { key: "smallShops", color: "#0ea5e9" },
-                        { key: "largeSellers", color: "#f59e0b" },
-                      ],
-                      lines: [
-                        { key: "smallShops", color: "#0ea5e9" },
-                        { key: "largeSellers", color: "#f59e0b" },
-                      ],
-                    }}
-                  />
-                  <DataChart
-                    title="Monthly Revenue Comparison"
-                    description="Average revenue by seller size (Last 6 months)"
-                    data={revenueData}
-                    type="bar"
-                    dataKeys={{
-                      xAxis: "month",
-                      bars: [
-                        { key: "smallShop", color: "#0ea5e9" },
-                        { key: "mediumSeller", color: "#14b8a6" },
-                        { key: "largeSeller", color: "#f59e0b" },
-                      ],
-                      lines: [
-                        { key: "smallShop", color: "#0ea5e9" },
-                        { key: "mediumSeller", color: "#14b8a6" },
-                        { key: "largeSeller", color: "#f59e0b" },
-                      ],
-                      areas: [
-                        { key: "smallShop", color: "#0ea5e9" },
-                        { key: "mediumSeller", color: "#14b8a6" },
-                        { key: "largeSeller", color: "#f59e0b" },
-                      ],
-                    }}
-                  />
-                </div>
-              </>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <DataChart
+                  title="Market Share Evolution"
+                  description="Small shops vs large sellers on major platforms (2018-2024)"
+                  data={marketShareData}
+                  type="area"
+                  dataKeys={{
+                    xAxis: "year",
+                    bars: [
+                      { key: "smallShops", color: "#0ea5e9" },
+                      { key: "largeSellers", color: "#f59e0b" },
+                    ],
+                    areas: [
+                      { key: "smallShops", color: "#0ea5e9" },
+                      { key: "largeSellers", color: "#f59e0b" },
+                    ],
+                    lines: [
+                      { key: "smallShops", color: "#0ea5e9" },
+                      { key: "largeSellers", color: "#f59e0b" },
+                    ],
+                  }}
+                />
+                <DataChart
+                  title="Monthly Revenue Comparison"
+                  description="Average revenue by seller size (Last 6 months)"
+                  data={revenueData}
+                  type="bar"
+                  dataKeys={{
+                    xAxis: "month",
+                    bars: [
+                      { key: "smallShop", color: "#0ea5e9" },
+                      { key: "mediumSeller", color: "#14b8a6" },
+                      { key: "largeSeller", color: "#f59e0b" },
+                    ],
+                    lines: [
+                      { key: "smallShop", color: "#0ea5e9" },
+                      { key: "mediumSeller", color: "#14b8a6" },
+                      { key: "largeSeller", color: "#f59e0b" },
+                    ],
+                    areas: [
+                      { key: "smallShop", color: "#0ea5e9" },
+                      { key: "mediumSeller", color: "#14b8a6" },
+                      { key: "largeSeller", color: "#f59e0b" },
+                    ],
+                  }}
+                />
+              </div>
             )}
           </section>
 
@@ -139,99 +127,47 @@ const Index = () => {
             {loading ? (
               <div className="animate-pulse h-64 bg-muted rounded-xl mb-6"></div>
             ) : (
-              <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                  <DataChart
-                    title="Customer Acquisition Cost"
-                    description="Cost to acquire new customers by platform type (₹)"
-                    data={customerAcquisitionData}
-                    type="bar"
-                    dataKeys={{
-                      xAxis: "platform",
-                      bars: [
-                        { key: "smallShop", color: "#0ea5e9" },
-                        { key: "largeSeller", color: "#f59e0b" },
-                      ],
-                      lines: [
-                        { key: "smallShop", color: "#0ea5e9" },
-                        { key: "largeSeller", color: "#f59e0b" },
-                      ],
-                      areas: [
-                        { key: "smallShop", color: "#0ea5e9" },
-                        { key: "largeSeller", color: "#f59e0b" },
-                      ],
-                    }}
-                  />
-                  <DataChart
-                    title="Platform Fee Comparison"
-                    description="Average fees as percentage of revenue"
-                    data={platformFeeData}
-                    type="bar"
-                    dataKeys={{
-                      xAxis: "platform",
-                      bars: [
-                        { key: "percentageOfRevenue", color: "#f59e0b" },
-                      ],
-                      lines: [
-                        { key: "percentageOfRevenue", color: "#f59e0b" },
-                      ],
-                      areas: [
-                        { key: "percentageOfRevenue", color: "#f59e0b" },
-                      ],
-                    }}
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  <InfoCard 
-                    title="Key Challenges" 
-                    icon={<LayoutDashboard className="h-5 w-5" />}
-                    gradient="insight"
-                  >
-                    <ul className="space-y-3">
-                      {challenges.map((challenge: any) => (
-                        <li key={challenge.id} className="flex gap-2">
-                          <div>
-                            <span className={`inline-block w-2 h-2 rounded-full mt-2 ${
-                              challenge.impact === "High" 
-                                ? "bg-red-500" 
-                                : challenge.impact === "Medium" 
-                                ? "bg-yellow-500" 
-                                : "bg-green-500"
-                            }`}></span>
-                          </div>
-                          <div>
-                            <h4 className="font-medium">{challenge.title}</h4>
-                            <p className="text-sm text-muted-foreground mt-1">
-                              {challenge.description}
-                            </p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </InfoCard>
-                  
-                  <InfoCard 
-                    title="Opportunities" 
-                    icon={<Layout className="h-5 w-5" />}
-                    gradient="visual"
-                  >
-                    <ul className="space-y-3">
-                      {opportunities.map((opportunity: any) => (
-                        <li key={opportunity.id} className="flex gap-2 items-start">
-                          <ArrowRight className="h-4 w-4 mt-1 text-visual-600" />
-                          <div>
-                            <h4 className="font-medium">{opportunity.title}</h4>
-                            <p className="text-sm text-muted-foreground mt-1">
-                              {opportunity.description}
-                            </p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </InfoCard>
-                </div>
-              </>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <DataChart
+                  title="Customer Acquisition Cost"
+                  description="Cost to acquire new customers by platform type (₹)"
+                  data={customerAcquisitionData}
+                  type="bar"
+                  dataKeys={{
+                    xAxis: "platform",
+                    bars: [
+                      { key: "smallShop", color: "#0ea5e9" },
+                      { key: "largeSeller", color: "#f59e0b" },
+                    ],
+                    lines: [
+                      { key: "smallShop", color: "#0ea5e9" },
+                      { key: "largeSeller", color: "#f59e0b" },
+                    ],
+                    areas: [
+                      { key: "smallShop", color: "#0ea5e9" },
+                      { key: "largeSeller", color: "#f59e0b" },
+                    ],
+                  }}
+                />
+                <DataChart
+                  title="Platform Fee Comparison"
+                  description="Average fees as percentage of revenue"
+                  data={platformFeeData}
+                  type="bar"
+                  dataKeys={{
+                    xAxis: "platform",
+                    bars: [
+                      { key: "percentageOfRevenue", color: "#f59e0b" },
+                    ],
+                    lines: [
+                      { key: "percentageOfRevenue", color: "#f59e0b" },
+                    ],
+                    areas: [
+                      { key: "percentageOfRevenue", color: "#f59e0b" },
+                    ],
+                  }}
+                />
+              </div>
             )}
           </section>
 
@@ -325,13 +261,36 @@ const Index = () => {
               </div>
             )}
           </section>
-
-          <section id="qa" className="mb-12">
+          
+          {/* Image placeholders moved to bottom */}
+          <section id="diagrams" className="mb-12">
             <DashboardHeader 
-              title="Ask a Question" 
-              subtitle="Get insights about small shops and e-commerce challenges in India" 
+              title="Diagram Uploads" 
+              subtitle="Upload your business analysis diagrams here" 
             />
-            <QASection />
+            
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="animate-pulse h-64 bg-muted rounded-xl"></div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <ImagePlaceholder 
+                  title="BOT Diagram" 
+                  description="Upload your Business Ownership Transfer diagram here" 
+                />
+                <ImagePlaceholder 
+                  title="CLD Diagram" 
+                  description="Upload your Causal Loop Diagram here" 
+                />
+                <ImagePlaceholder 
+                  title="Stock Flow Diagram" 
+                  description="Upload your Stock and Flow diagram here" 
+                />
+              </div>
+            )}
           </section>
         </div>
       </main>
