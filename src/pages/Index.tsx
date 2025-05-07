@@ -294,6 +294,7 @@ const Index = () => {
                   description="Causal Loop Diagram showing the relationship between factors affecting small sellers"
                   imageSrc="/lovable-uploads/ceabfded-d283-48a8-93ba-8a257f7827c5.png"
                   downloadable={true}
+                  downloadExtension="mdl"
                 />
                 <ImagePlaceholder 
                   title="Stock Flow Diagram" 

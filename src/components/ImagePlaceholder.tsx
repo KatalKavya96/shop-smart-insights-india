@@ -10,6 +10,7 @@ type ImagePlaceholderProps = {
   className?: string;
   imageSrc?: string;
   downloadable?: boolean;
+  downloadExtension?: string;
 };
 
 const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
@@ -18,6 +19,7 @@ const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
   className,
   imageSrc,
   downloadable = false,
+  downloadExtension = "png",
 }) => {
   return (
     <div
@@ -37,7 +39,7 @@ const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
           <p className="text-muted-foreground text-sm mb-4">{description}</p>
           {downloadable && (
             <Button variant="outline" size="sm" asChild>
-              <a href={imageSrc} download={`${title.replace(/\s+/g, '-').toLowerCase()}.png`} className="flex items-center gap-2">
+              <a href={imageSrc} download={`${title.replace(/\s+/g, '-').toLowerCase()}.${downloadExtension}`} className="flex items-center gap-2">
                 <Download size={16} />
                 Download {title}
               </a>
