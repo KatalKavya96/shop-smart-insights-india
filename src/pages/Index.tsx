@@ -74,6 +74,9 @@ const Index = () => {
                   description="Small shops vs large sellers on major platforms (2018-2024)"
                   data={marketShareData}
                   type="area"
+                  isLive={true}
+                  updateInterval={1000}
+                  maxDataPoints={10}
                   dataKeys={{
                     xAxis: "year",
                     bars: [
@@ -95,6 +98,8 @@ const Index = () => {
                   description="Average revenue by seller size (Last 6 months)"
                   data={revenueData}
                   type="bar"
+                  isLive={true}
+                  updateInterval={1500}
                   dataKeys={{
                     xAxis: "month",
                     bars: [
@@ -133,6 +138,8 @@ const Index = () => {
                   description="Cost to acquire new customers by platform type (₹)"
                   data={customerAcquisitionData}
                   type="bar"
+                  isLive={true}
+                  updateInterval={2000}
                   dataKeys={{
                     xAxis: "platform",
                     bars: [
@@ -154,6 +161,8 @@ const Index = () => {
                   description="Average fees as percentage of revenue"
                   data={platformFeeData}
                   type="bar"
+                  isLive={true}
+                  updateInterval={1800}
                   dataKeys={{
                     xAxis: "platform",
                     bars: [

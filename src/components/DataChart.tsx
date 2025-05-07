@@ -1,5 +1,5 @@
 
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -15,6 +15,7 @@ import {
   Area,
 } from "recharts";
 import { cn } from "@/lib/utils";
+import { ChartColumnBig } from "lucide-react";
 
 type ChartType = "bar" | "line" | "area";
 
@@ -30,17 +31,73 @@ type DataChartProps = {
     areas?: { key: string; color: string }[];
   };
   className?: string;
+  isLive?: boolean;
+  updateInterval?: number; // in milliseconds
+  maxDataPoints?: number;
 };
 
 const DataChart: FC<DataChartProps> = ({
-  data,
+  data: initialData,
   title,
   description,
   type = "bar",
   dataKeys,
   className,
+  isLive = false,
+  updateInterval = 1000, // default to 1 second
+  maxDataPoints = 20, // default to showing 20 data points at a time
 }) => {
   const [chartType, setChartType] = useState<ChartType>(type);
+  const [data, setData] = useState<any[]>(initialData);
+  const [isLiveActive, setIsLiveActive] = useState<boolean>(isLive);
+
+  // Effect for handling live data updates
+  useEffect(() => {
+    if (!isLiveActive) return;
+
+    const interval = setInterval(() => {
+      // Update data with slight randomization to simulate live changes
+      setData((currentData) => {
+        const newData = [...currentData];
+
+        // Update last item with slight variations
+        const lastItem = { ...newData[newData.length - 1] };
+        
+        // Modify each numeric value with a small random change
+        Object.keys(lastItem).forEach(key => {
+          if (typeof lastItem[key] === 'number' && key !== dataKeys.xAxis) {
+            // Apply a small random change between -5% and +5%
+            const changePercent = (Math.random() * 10 - 5) / 100;
+            lastItem[key] = Math.max(0, lastItem[key] * (1 + changePercent));
+          }
+        });
+        
+        // Create a new timestamp if xAxis is time-based
+        if (typeof lastItem[dataKeys.xAxis] === 'string' && 
+            (lastItem[dataKeys.xAxis].includes(':') || 
+             ['date', 'time', 'timestamp'].some(term => dataKeys.xAxis.toLowerCase().includes(term)))) {
+          const now = new Date();
+          lastItem[dataKeys.xAxis] = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+        } else if (typeof lastItem[dataKeys.xAxis] === 'number') {
+          // If xAxis is numeric, increment it
+          lastItem[dataKeys.xAxis] = lastItem[dataKeys.xAxis] + 1;
+        }
+        
+        // Add new data point and limit the array size
+        const result = [...newData, lastItem];
+        return result.slice(-maxDataPoints);
+      });
+    }, updateInterval);
+
+    return () => clearInterval(interval);
+  }, [isLiveActive, dataKeys.xAxis, updateInterval, maxDataPoints]);
+
+  // Reset to initial data when live mode is toggled off
+  useEffect(() => {
+    if (!isLiveActive) {
+      setData(initialData);
+    }
+  }, [isLiveActive, initialData]);
 
   const renderChart = () => {
     switch (chartType) {
@@ -79,6 +136,7 @@ const DataChart: FC<DataChartProps> = ({
                   dataKey={line.key}
                   stroke={line.color}
                   activeDot={{ r: 8 }}
+                  isAnimationActive={!isLiveActive} // Disable animation for live updates
                 />
               ))}
             </LineChart>
@@ -101,6 +159,7 @@ const DataChart: FC<DataChartProps> = ({
                   stroke={area.color}
                   fill={area.color}
                   fillOpacity={0.3}
+                  isAnimationActive={!isLiveActive} // Disable animation for live updates
                 />
               ))}
             </AreaChart>
@@ -154,9 +213,30 @@ const DataChart: FC<DataChartProps> = ({
           >
             Area
           </button>
+          {isLive && (
+            <button
+              onClick={() => setIsLiveActive(!isLiveActive)}
+              className={cn(
+                "px-3 py-1 rounded text-sm ml-2 flex items-center gap-1",
+                isLiveActive
+                  ? "bg-green-600 text-white"
+                  : "bg-secondary text-secondary-foreground"
+              )}
+            >
+              <span className={cn("h-2 w-2 rounded-full", isLiveActive ? "bg-white animate-pulse" : "bg-muted-foreground")}></span>
+              Live
+            </button>
+          )}
         </div>
       </div>
       {renderChart()}
+      {isLiveActive && (
+        <div className="flex justify-end mt-2">
+          <span className="text-xs text-muted-foreground">
+            Live updates every {updateInterval/1000}s
+          </span>
+        </div>
+      )}
     </div>
   );
 };
