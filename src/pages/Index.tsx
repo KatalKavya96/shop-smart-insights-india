@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import DashboardHeader from "@/components/DashboardHeader";
@@ -292,7 +291,9 @@ const Index = () => {
                 />
                 <ImagePlaceholder 
                   title="CLD Diagram" 
-                  description="Upload your Causal Loop Diagram here" 
+                  description="Causal Loop Diagram showing the relationship between factors affecting small sellers"
+                  imageSrc="/lovable-uploads/ceabfded-d283-48a8-93ba-8a257f7827c5.png"
+                  downloadable={true}
                 />
                 <ImagePlaceholder 
                   title="Stock Flow Diagram" 
