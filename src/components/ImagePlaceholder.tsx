@@ -1,4 +1,3 @@
-
 import { FC } from "react";
 import { cn } from "@/lib/utils";
 import { Image as ImageIcon, Download } from "lucide-react";
@@ -11,6 +10,7 @@ type ImagePlaceholderProps = {
   imageSrc?: string;
   downloadable?: boolean;
   downloadExtension?: string;
+  downloadLink?: string; // <-- added prop
 };
 
 const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
@@ -20,6 +20,7 @@ const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
   imageSrc,
   downloadable = false,
   downloadExtension = "png",
+  downloadLink, // <-- added here
 }) => {
   return (
     <div
@@ -37,9 +38,16 @@ const ImagePlaceholder: FC<ImagePlaceholderProps> = ({
           />
           <h3 className="font-medium text-lg mb-2">{title}</h3>
           <p className="text-muted-foreground text-sm mb-4">{description}</p>
+
           {downloadable && (
             <Button variant="outline" size="sm" asChild>
-              <a href={imageSrc} download={`${title.replace(/\s+/g, '-').toLowerCase()}.${downloadExtension}`} className="flex items-center gap-2">
+              <a
+                href={downloadLink || imageSrc}
+                {...(downloadLink
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : { download: `${title.replace(/\s+/g, "-").toLowerCase()}.${downloadExtension}` })}
+                className="flex items-center gap-2"
+              >
                 <Download size={16} />
                 Download {title}
               </a>

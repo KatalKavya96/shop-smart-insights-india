@@ -289,12 +289,13 @@ const Index = () => {
                   title="BOT Diagram" 
                   description="Upload your Business Ownership Transfer diagram here" 
                 />
-                <ImagePlaceholder 
+               <ImagePlaceholder 
                   title="CLD Diagram" 
                   description="Causal Loop Diagram showing the relationship between factors affecting small sellers"
                   imageSrc="/lovable-uploads/ceabfded-d283-48a8-93ba-8a257f7827c5.png"
                   downloadable={true}
                   downloadExtension="mdl"
+                  downloadLink="https://drive.google.com/file/d/1dO4gc2G5ojC9m7QFPejIihKJ2kHwDVAl/view?usp=sharing"
                 />
                 <ImagePlaceholder 
                   title="Stock Flow Diagram" 
